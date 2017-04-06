@@ -13,6 +13,7 @@
 		E9A2A7BF1E968AF70098198B /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2A7BE1E968AF70098198B /* YelpClient.swift */; };
 		E9A2A7C11E969C270098198B /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2A7C01E969C270098198B /* ApiKey.swift */; };
 		E9A2A7C31E969C840098198B /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = E9A2A7C21E969C840098198B /* Podfile.lock */; };
+		E9A2BC251E96F11F00A5399F /* YelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A2BC241E96F11F00A5399F /* YelpCell.swift */; };
 		E9D104A41E96813700F41665 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D104A31E96813700F41665 /* AppDelegate.swift */; };
 		E9D104A91E96813700F41665 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9D104A71E96813700F41665 /* Main.storyboard */; };
 		E9D104AB1E96813700F41665 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9D104AA1E96813700F41665 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		E9A2A7C01E969C270098198B /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		E9A2A7C21E969C840098198B /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		E9A2A7C41E969CA20098198B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E9A2BC241E96F11F00A5399F /* YelpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpCell.swift; sourceTree = "<group>"; };
 		E9D104A01E96813700F41665 /* Yelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D104A31E96813700F41665 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9D104A81E96813700F41665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				E9D104A31E96813700F41665 /* AppDelegate.swift */,
 				E9A2A7BA1E968AA00098198B /* BusinessViewController.swift */,
 				E9A2A7BC1E968ACA0098198B /* Business.swift */,
+				E9A2BC241E96F11F00A5399F /* YelpCell.swift */,
 				E9A2A7BE1E968AF70098198B /* YelpClient.swift */,
 				E9A2A7C01E969C270098198B /* ApiKey.swift */,
 				E9D104A71E96813700F41665 /* Main.storyboard */,
@@ -231,6 +234,7 @@
 				E9A2A7BD1E968ACA0098198B /* Business.swift in Sources */,
 				E9A2A7BB1E968AA00098198B /* BusinessViewController.swift in Sources */,
 				E9D104A41E96813700F41665 /* AppDelegate.swift in Sources */,
+				E9A2BC251E96F11F00A5399F /* YelpCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
