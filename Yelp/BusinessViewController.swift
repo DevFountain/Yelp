@@ -9,12 +9,16 @@
 import UIKit
 import AlamofireImage
 
-class BusinessViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+
+    @IBOutlet weak var tableView: UITableView!
 
     var businesses: [Business]!
 
-    @IBOutlet weak var tableView: UITableView!
-    
+    var filteredBusinesses: [Business]!
+
+    var searchController: UISearchController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +33,18 @@ class BusinessViewController: UIViewController, UITableViewDataSource, UITableVi
 //            self.businesses = businesses
 //            self.tableView.reloadData()
 //        }
+
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+
+        searchController.searchBar.placeholder = "Restaurants"
+        searchController.searchBar.sizeToFit()
+        navigationItem.titleView = searchController.searchBar
+
+        definesPresentationContext = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,10 +53,14 @@ class BusinessViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let businesses = businesses {
-            return businesses.count
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredBusinesses.count
         } else {
-            return 0
+            if let businesses = businesses {
+                return businesses.count
+            } else {
+                return 0
+            }
         }
     }
 
@@ -55,12 +75,19 @@ class BusinessViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "YelpCell", for: indexPath) as! YelpCell
 
-        let business = self.businesses[indexPath.row]
+        var business: Business!
+
+        if searchController.isActive && searchController.searchBar.text != "" {
+            business = filteredBusinesses[indexPath.row]
+        } else {
+            business = businesses[indexPath.row]
+        }
 
         cell.businessImageView.image = nil
         if let imageUrl = business.imageURL {
-            cell.businessImageView.af_setImage(withURL: imageUrl)
+            cell.businessImageView.af_setImage(withURL: imageUrl, imageTransition: .crossDissolve(0.3), runImageTransitionIfCached: false)
         }
+        cell.businessImageView.layer.cornerRadius = cell.businessImageView.frame.height / 20
 
         cell.nameLabel.text = business.name
 
@@ -72,13 +99,25 @@ class BusinessViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         cell.ratingImageView.image = UIImage(named: "large_\(businessRating)")
 
-        cell.reviewsLabel.text = "\(business.reviewCount ?? 0) Reviews"
+        cell.reviewsLabel.text = "\(business.reviewCount ?? 0) reviews"
 
         cell.addressLabel.text = business.address
 
         cell.categoriesLabel.text = business.categories
 
         return cell
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filteredBusinesses = searchText.isEmpty ? businesses : businesses.filter({ (business) -> Bool in
+                if let name = business.name {
+                    return name.range(of: searchText, options: .caseInsensitive) != nil
+                }
+                return false
+            })
+            tableView.reloadData()
+        }
     }
 
     /*
