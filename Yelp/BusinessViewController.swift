@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class BusinessViewController: UITableViewController, UISearchResultsUpdating, FiltersViewControllerDelegate {
 
@@ -19,9 +20,12 @@ class BusinessViewController: UITableViewController, UISearchResultsUpdating, Fi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         Business.searchWithTerm(term: "Restaurants") { (businesses: [Business]?, error: Error?) in
             self.businesses = businesses
             self.tableView.reloadData()
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
 
         searchController = UISearchController(searchResultsController: nil)
@@ -35,6 +39,12 @@ class BusinessViewController: UITableViewController, UISearchResultsUpdating, Fi
         navigationItem.titleView = searchController.searchBar
 
         definesPresentationContext = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.contentOffset = CGPoint(x: 0.0, y: -64.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,9 +108,12 @@ class BusinessViewController: UITableViewController, UISearchResultsUpdating, Fi
         let distance = filters["distance"] as? NSNumber
         let deals = filters["deals"] as? Bool
 
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         Business.searchWithTerm(term: "Restaurants", categories: categories, sort: sort, distance: distance as? Int, deals: deals) { (businesses: [Business]?, error: Error?) in
             self.businesses = businesses
             self.tableView.reloadData()
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
 

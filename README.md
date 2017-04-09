@@ -33,23 +33,24 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Implemented latest version of the Yelp API (Yelp Fusion)
+- [x] Added progress indicator that displays while requesting data
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Retain the state of the filters each time the filter view controller is dismissed.
+2. Implement infinite scroll with filters enabled. 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<!--<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />-->
+<img src='Yelp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-The major challenge was figuring out a proper layout for the business table view cell and then applying the proper contstraints.
+The major challenge was figuring out a proper layout for the business table view cell and then applying the proper contstraints. Another challenge was deciding how to implement and track each type of filter.
 
 ## License
 
