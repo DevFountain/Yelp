@@ -6,7 +6,7 @@
 //  Copyright © 2017 DevFountain LLC. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
 enum YelpSortMode: String {
@@ -41,10 +41,10 @@ class YelpClient {
     }
 
     func searchWithTerm(_ term: String, completion: @escaping ([Business]?, Error?) -> Void) {
-        return searchWithTerm(term, categories: nil, sort: nil, deals: nil, completion: completion)
+        return searchWithTerm(term, categories: nil, sort: nil, distance: nil, deals: nil, completion: completion)
     }
 
-    func searchWithTerm(_ term: String, categories: [String]?, sort: YelpSortMode?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) {
+    func searchWithTerm(_ term: String, categories: [String]?, sort: YelpSortMode?, distance: Int?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) {
         let baseUrl = "https://api.yelp.com/v3/businesses/search"
 
         let headers: HTTPHeaders = [
@@ -65,6 +65,10 @@ class YelpClient {
 
         if sort != nil {
             parameters["sort_by"] = sort!.rawValue
+        }
+
+        if distance != nil {
+            parameters["radius"] = distance!
         }
 
         if deals != nil {

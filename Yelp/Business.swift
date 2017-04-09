@@ -6,9 +6,9 @@
 //  Copyright © 2017 DevFountain LLC. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class Business: NSObject {
+struct Business {
 
     let name: String?
     let address: String?
@@ -17,6 +17,7 @@ class Business: NSObject {
     let distance: String?
     let rating: NSNumber?
     let reviewCount: NSNumber?
+    let price: String?
 
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -30,7 +31,7 @@ class Business: NSObject {
 
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
-            imageURL = URL(string: imageURLString!)!
+            imageURL = URL(string: imageURLString!)
         } else {
             imageURL = nil
         }
@@ -55,12 +56,14 @@ class Business: NSObject {
             distance = nil
         }
 
-        rating = dictionary["rating"] as? NSNumber
+        rating = dictionary["rating"] as? NSNumber ?? 0
 
-        reviewCount = dictionary["review_count"] as? NSNumber
+        reviewCount = dictionary["review_count"] as? NSNumber ?? 0
+
+        price = dictionary["price"] as? String
     }
 
-    class func businesses(array: [NSDictionary]) -> [Business] {
+    static func businesses(array: [NSDictionary]) -> [Business] {
         var businesses = [Business]()
         for dictionary in array {
             let business = Business(dictionary: dictionary)
@@ -69,12 +72,12 @@ class Business: NSObject {
         return businesses
     }
 
-    class func searchWithTerm(term: String, completion: @escaping ([Business]?, Error?) -> Void) {
+    static func searchWithTerm(term: String, completion: @escaping ([Business]?, Error?) -> Void) {
         _ = YelpClient.sharedInstance.searchWithTerm(term, completion: completion)
     }
 
-    class func searchWithTerm(term: String, categories: [String]?, sort: YelpSortMode?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) {
-        _ = YelpClient.sharedInstance.searchWithTerm(term, categories: categories, sort: sort, deals: deals, completion: completion)
+    static func searchWithTerm(term: String, categories: [String]?, sort: YelpSortMode?, distance: Int?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) {
+        _ = YelpClient.sharedInstance.searchWithTerm(term, categories: categories, sort: sort, distance: distance, deals: deals, completion: completion)
     }
 
 }
