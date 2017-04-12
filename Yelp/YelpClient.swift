@@ -23,8 +23,8 @@ class YelpClient {
 
         let parameters: Parameters = [
             "grant_type": "client_credentials",
-            "client_id": client_id,
-            "client_secret": client_secret
+            "client_id": clientId,
+            "client_secret": clientSecret
         ]
 
         Alamofire.request(oauthUrl, method: .post, parameters: parameters).validate().responseJSON { (response) in
@@ -48,7 +48,7 @@ class YelpClient {
         let baseUrl = "https://api.yelp.com/v3/businesses/search"
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(access_token)",
+            "Authorization": "Bearer \(accessToken)",
             "Accept": "application/json"
         ]
 
