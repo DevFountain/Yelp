@@ -26,7 +26,10 @@ class BusinessCell: UITableViewCell {
 
             addressLabel.text = business.address
 
-            businessImageView.af_setImage(withURL: business.imageURL!, imageTransition: .crossDissolve(0.3), runImageTransitionIfCached: false)
+            businessImageView.image = nil
+            if let businessImageURL = business.imageURL {
+                businessImageView.af_setImage(withURL: businessImageURL, imageTransition: .crossDissolve(0.3), runImageTransitionIfCached: false)
+            }
 
             distanceLabel.text = business.distance
 
